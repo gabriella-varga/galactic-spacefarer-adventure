@@ -36,7 +36,6 @@ Authorization: Basic YWRtaW51c2VyOmFiY2QxMjM0
   "spacesuitColor_code": "COB"
 }
 
-
 ### Failes to create a new spacefarer as a non-admin user (403 Forbidden)
 # @name createSpacefarer
 POST {{baseUrl}}/{{svc}}/Spacefarers
@@ -53,4 +52,20 @@ Authorization: Basic dmlld2VyOmFiY2QxMjM0
   "department": "Exploration",
   "position": "Navigator",
   "spacesuitColor": "Cobalt"
+}
+
+### Create a new spacefarer with email as Admin on Planet X
+POST {{baseUrl}}/{{svc}}/Spacefarers
+Authorization: Basic YWRtaW51c2VyOmFiY2QxMjM0
+Content-Type: application/json
+Accept: application/json
+
+{
+"name": "Cassian Andor",
+"stardustCollection": 20,
+"wormholeNavigationSkill": 3,
+"department_code":   "EXP",
+"position_code":     "NAV",
+"spacesuitColor_code": "COB",
+"email": ""
 }

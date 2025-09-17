@@ -4,13 +4,14 @@
   "description": "A simple CAP project.",
   "dependencies": {
     "@sap/cds": "^9",
-    "express": "^4"
+    "express": "^4",
+    "nodemailer": "^7.0.6"
   },
   "devDependencies": {
     "@cap-js/sqlite": "^2"
   },
   "scripts": {
-    "start": "DEBUG=cds:auth* cds-serve"
+    "start": "SMTP_HOST=localhost SMTP_PORT=1025 DEBUG=cds:auth* cds-serve"
   },
   "private": true,
   "cds": {
@@ -18,11 +19,25 @@
       "auth": {
         "kind": "mocked",
         "users": {
-          "vieweruser": { "password": "abcd1234", "roles": ["Viewer"] },
-          "adminuser":  { "password": "abcd1234", "roles": ["Admin"] }
+          "vieweruser": {
+            "password": "abcd1234",
+            "roles": ["Viewer"],
+            "attributes": {
+              "planet": ["Planet X"],
+  }
+              "businessRole": ["Viewer"]
+            }
+          },
+          "adminuser": {
+            "password": "abcd1234",
+            "roles": ["Admin"],
+            "attributes": {
+              "planet": ["Planet X"],
+              "businessRole": ["Admin"]
+            }
+          }
         }
       }
     }
   }
-
 }
