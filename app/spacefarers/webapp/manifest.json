@@ -17,10 +17,9 @@
     },
     "dataSources": {
       "mainService": {
-        "uri": "/galaxy/",
+        "uri": "/odata/v4/galaxy/",
         "type": "OData",
         "settings": {
-          "annotations": [],
           "odataVersion": "4.0"
         }
       }
@@ -88,7 +87,12 @@
       },
       "@i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
-        "uri": "i18n/i18n.properties"
+        "uri": "i18n/i18n.properties",
+        "settings": {
+          "bundleName": "sap.galaxy.spacefarers.i18n.i18n",
+          "supportedLocales": [""],
+          "fallbackLocale": ""
+        }
       }
     },
     "resources": {
@@ -117,6 +121,7 @@
             "settings": {
               "contextPath": "/Spacefarers",
               "variantManagement": "Page",
+              "entitySet": "Spacefarers",
               "navigation": {
                 "Spacefarers": {
                   "detail": {
@@ -140,8 +145,9 @@
           "name": "sap.fe.templates.ObjectPage",
           "options": {
             "settings": {
-              "editableHeaderContent": false,
-              "contextPath": "/Spacefarers"
+              "entitySet": "Spacefarers",
+              "contextPath": "/Spacefarers",
+              "editableHeaderContent": true
             }
           }
         }

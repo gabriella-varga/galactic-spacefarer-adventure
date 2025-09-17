@@ -27,7 +27,7 @@ type Role        : String enum {
     Cadet;
 }
 
-entity Planets {
+entity Planets : cuid {
     key code  : Code;
         name  : Name;
         descr : Description;
@@ -51,14 +51,14 @@ entity SuitColors {
         descr : Description;
 }
 
-entity Spacefarers : cuid, managed {
+entity Spacefarers : cuid {
     name                    : Name @mandatory;
     email                   : String(150);
     stardustCollection      : Stardust default 0;
     wormholeNavigationSkill : WormholeNav default 0;
     totalMerit              : MeritPoints default 0;
 
-    originPlanet            : Association to Planets @assert.target;
+    originPlanet            : Association to Planets;
     department              : Association to Departments;
     position                : Association to Positions;
     spacesuitColor          : Association to SuitColors;
