@@ -1,13 +1,19 @@
+using { cuid, managed, sap } from '@sap/cds/common';
+
 namespace sap.galaxy;
 
-entity Spacefarers {
-    key ID                      : UUID;
-        name                    : String(100);
-        stardustCollection      : Integer;
-        wormholeNavigationSkill : Integer;
-        totalMerit              : Integer;
-        originPlanet            : String(100);
-        department              : String(100);
-        position                : String(100);
-        spacesuitColor          : String(100);
+entity Planets     : sap.common.CodeList { }
+entity Departments : sap.common.CodeList { }
+entity Positions   : sap.common.CodeList { }
+entity SuitColors  : sap.common.CodeList { }
+
+entity Spacefarers : cuid, managed {
+    name                    : String(100);
+    stardustCollection      : Integer;
+    wormholeNavigationSkill : Integer;
+    totalMerit              : Integer;
+    originPlanet            : Association to Planets;
+    department              : Association to Departments;
+    position                : Association to Positions;
+    spacesuitColor          : Association to SuitColors;
 }
