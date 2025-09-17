@@ -1,36 +1,45 @@
-using { cuid, managed, sap } from '@sap/cds/common';
+using { cuid, managed } from '@sap/cds/common';
 
 namespace sap.galaxy;
 
+type Code : String(10);
+type Name : String(80);
+type Description : String(200);
+
+type Stardust    : Integer @assert.range: [0, 1000];
+type WormholeNav : Integer @assert.range: [1, 10];
+type MeritPoints : Integer;
+
 entity Planets {
-  key code : String(10);
-      name : String(80);
-      descr: String(200);
+  key code  : Code;
+      name  : Name;
+      descr : Description;
 }
 
 entity Departments {
-  key code : String(10);
-      name : String(80);
-      descr: String(200);
+  key code  : Code;
+      name  : Name;
+      descr : Description;
 }
 
 entity Positions {
-  key code : String(10);
-      name : String(80);
-      descr: String(200);
+  key code  : Code;
+      name  : Name;
+      descr : Description;
 }
 
 entity SuitColors {
-  key code : String(10);
-      name : String(80);
-      descr: String(200);
+  key code  : Code;
+      name  : Name;
+      descr : Description;
 }
 
 entity Spacefarers : cuid, managed {
-    name                    : String(100);
-    stardustCollection      : Integer;
-    wormholeNavigationSkill : Integer;
-    totalMerit              : Integer;
+    name                    : Name;
+    stardustCollection      : Stardust;
+    wormholeNavigationSkill : WormholeNav;
+    totalMerit              : MeritPoints;
+
     originPlanet            : Association to Planets;
     department              : Association to Departments;
     position                : Association to Positions;
