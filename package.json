@@ -11,7 +11,7 @@
     "@cap-js/sqlite": "^2"
   },
   "scripts": {
-    "start": "SMTP_HOST=localhost SMTP_PORT=1025 DEBUG=cds:auth* cds-serve"
+    "start": "DEBUG=cds:auth* cds-serve"
   },
   "private": true,
   "cds": {
