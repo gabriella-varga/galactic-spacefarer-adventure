@@ -52,13 +52,13 @@ entity SuitColors {
 }
 
 entity Spacefarers : cuid, managed {
-    name                    : Name;
+    name                    : Name @mandatory;
     email                   : String(150);
-    stardustCollection      : Stardust;
-    wormholeNavigationSkill : WormholeNav;
-    totalMerit              : MeritPoints;
+    stardustCollection      : Stardust default 0;
+    wormholeNavigationSkill : WormholeNav default 0;
+    totalMerit              : MeritPoints default 0;
 
-    originPlanet            : Association to Planets;
+    originPlanet            : Association to Planets @assert.target;
     department              : Association to Departments;
     position                : Association to Positions;
     spacesuitColor          : Association to SuitColors;
