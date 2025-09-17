@@ -1,0 +1,56 @@
+@baseUrl = http://localhost:4004
+@svc = galaxy
+
+### Service Document
+GET {{baseUrl}}/{{svc}}
+Accept: application/json
+
+### Metadata
+GET {{baseUrl}}/{{svc}}/$metadata
+Accept: application/xml
+
+### Get all spacefarers (401 Unauthorized)
+GET {{baseUrl}}/{{svc}}/Spacefarers?$count=true&$orderby=name
+Accept: application/json
+
+### Get all spacefarers (200 OK) as Admin on Planet X
+GET {{baseUrl}}/{{svc}}/Spacefarers?$count=true&$orderby=name
+Authorization: Basic YWRtaW51c2VyOmFiY2QxMjM0
+Accept: application/json
+
+### Create a new spacefarer
+# @name createSpacefarer
+POST {{baseUrl}}/{{svc}}/Spacefarers
+Content-Type: application/json
+Accept: application/json
+Authorization: Basic YWRtaW51c2VyOmFiY2QxMjM0
+
+{
+  "name": "Lyra Vega",
+  "stardustCollection": 20,
+  "wormholeNavigationSkill": 3,
+  "totalMerit": 0,
+  "originPlanet": "Planet X",
+  "department": "Exploration",
+  "position": "Navigator",
+  "spacesuitColor": "Cobalt"
+}
+
+
+### Failes to create a new spacefarer as a non-admin user (403 Forbidden)
+# @name createSpacefarer
+POST {{baseUrl}}/{{svc}}/Spacefarers
+Content-Type: application/json
+Accept: application/json
+Authorization: Basic dmlld2VyOmFiY2QxMjM0
+
+{
+  "name": "Lyra Vega",
+  "stardustCollection": 20,
+  "wormholeNavigationSkill": 3,
+  "totalMerit": 0,
+  "originPlanet": "Planet X",
+  "department": "Exploration",
+  "position": "Navigator",
+  "spacesuitColor": "Cobalt"
+}

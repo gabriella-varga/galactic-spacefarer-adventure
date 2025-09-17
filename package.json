@@ -10,7 +10,19 @@
     "@cap-js/sqlite": "^2"
   },
   "scripts": {
-    "start": "cds-serve"
+    "start": "DEBUG=cds:auth* cds-serve"
   },
-  "private": true
+  "private": true,
+  "cds": {
+    "requires": {
+      "auth": {
+        "kind": "mocked",
+        "users": {
+          "vieweruser": { "password": "abcd1234", "roles": ["Viewer"] },
+          "adminuser":  { "password": "abcd1234", "roles": ["Admin"] }
+        }
+      }
+    }
+  }
+
 }
