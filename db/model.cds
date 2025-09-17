@@ -2,10 +2,29 @@ using { cuid, managed, sap } from '@sap/cds/common';
 
 namespace sap.galaxy;
 
-entity Planets     : sap.common.CodeList { }
-entity Departments : sap.common.CodeList { }
-entity Positions   : sap.common.CodeList { }
-entity SuitColors  : sap.common.CodeList { }
+entity Planets {
+  key code : String(10);
+      name : String(80);
+      descr: String(200);
+}
+
+entity Departments {
+  key code : String(10);
+      name : String(80);
+      descr: String(200);
+}
+
+entity Positions {
+  key code : String(10);
+      name : String(80);
+      descr: String(200);
+}
+
+entity SuitColors {
+  key code : String(10);
+      name : String(80);
+      descr: String(200);
+}
 
 entity Spacefarers : cuid, managed {
     name                    : String(100);

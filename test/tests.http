@@ -30,10 +30,10 @@ Authorization: Basic YWRtaW51c2VyOmFiY2QxMjM0
   "stardustCollection": 20,
   "wormholeNavigationSkill": 3,
   "totalMerit": 0,
-  "originPlanet": "Planet X",
-  "department": "Exploration",
-  "position": "Navigator",
-  "spacesuitColor": "Cobalt"
+  "originPlanet_code": "PX",
+  "department_code": "EXP",
+  "position_code": "NAV",
+  "spacesuitColor_code": "COB"
 }
 
 
