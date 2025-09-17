@@ -5,17 +5,18 @@ using { sap.galaxy as g } from '../db/model';
 service GalacticService {
     { grant: 'READ', to: ['Viewer','Admin'] },
     { grant: ['CREATE','UPDATE','DELETE'], to: ['Admin'] }
+  @odata.draft.enabled
   @UI.LineItem: [
-    { Value: name,                    Label: 'Name',                  Importance: #High },
-    { Value: role,                    Label: 'Role',                  Importance: #High },
+    { Value: name,                    Label: 'Name'               },
+    { Value: role,                    Label: 'Role'               },
 
-    { Value: originPlanet_code,       Label: 'Origin Planet Code',    Importance: #High },
-    { Value: department.name,         Label: 'Department',            Importance: #High },
-    { Value: spacesuitColor.name,     Label: 'Suit Color Code',       Importance: #High },
+    { Value: originPlanet_code,       Label: 'Origin Planet Code' },
+    { Value: department.name,         Label: 'Department'         },
+    { Value: spacesuitColor.name,     Label: 'Suit Color Code'    },
 
-    { Value: stardustCollection,      Label: 'Stardust #',            Importance: #High },
-    { Value: wormholeNavigationSkill, Label: 'Wormhole Nav #',        Importance: #High },
-    { Value: totalMerit,              Label: 'Merit Points #',        Importance: #High }
+    { Value: stardustCollection,      Label: 'Stardust #'         },
+    { Value: wormholeNavigationSkill, Label: 'Wormhole Nav #'     },
+    { Value: totalMerit,              Label: 'Merit Points #'     }
   ]
 
   entity Spacefarers as projection on g.Spacefarers;
