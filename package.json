@@ -6,17 +6,21 @@
     "@sap/cds": "^9",
     "@sap/eslint-plugin-ui5-jsdocs": "^2.0.5",
     "@sapui5/ts-types": "^1.92.2",
+    "cors": "^2.8.5",
     "eslint": "^7.32.0",
     "express": "^4",
-    "nodemailer": "^7.0.6"
+    "nodemailer": "^7.0.6",
+    "uuid": "^13.0.0"
   },
   "devDependencies": {
     "@cap-js/sqlite": "^2",
-    "cds-plugin-ui5": "^0.13.0"
+    "cds-plugin-ui5": "^0.13.0",
+    "cross-env": "^10.0.0"
   },
   "scripts": {
     "start": "DEBUG=cds:auth* cds-serve",
-    "watch-spacefarers": "cds watch --open sap.galaxy.spacefarers/index.html?sap-ui-xx-viewCache=false --livereload false"
+    "watch-spacefarers1": "DEBUG=cds:auth* cds watch --open sap.galaxy.spacefarers/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "watch-spacefarers": "cds watch --open galaxy.spacefarers/index.html?sap-ui-xx-viewCache=false --livereload false"
   },
   "private": true,
   "cds": {
@@ -24,26 +28,19 @@
       "auth": {
         "kind": "mocked",
         "users": {
-          "vieweruser": {
-            "password": "abcd1234",
-            "roles": ["Viewer"],
-            "attributes": {
-              "planet": ["Planet X"],
-  }
-              "businessRole": ["Viewer"]
-            }
-          },
-          "adminuser": {
-            "password": "abcd1234",
-            "roles": ["Admin"],
-            "attributes": {
-              "planet": ["Planet X"],
-              "businessRole": ["Admin"]
-            }
-          }
+          "vieweruser": { "password": "abcd1234",  "roles": ["Viewer"], "attributes": { "planet": ["Planet X"] } },
+          "adminuser":  { "password": "abcd1234",  "roles": ["Admin"],  "attributes": { "planet": ["Planet X"] } },
+          "nova":       { "password": "nova",      "roles": ["Admin"],  "attributes": { "planet": ["Planet Y"] } },
+          "cassian":    { "password": "cass",      "roles": ["Viewer"], "attributes": { "planet": ["Planet X"] } },
+          "recruiter":  { "password": "recruit",   "roles": ["Recruiter"], "attributes": { "planet": ["Planet X"] } }
         }
+      },
+      "db": {
+        "kind": "sqlite",
+        "credentials": { "database": "db/galaxy.db" }
       }
-    }
+    },
+    "fiori": { "bypass_draft": true }
   },
   "workspaces": [
     "app/*"

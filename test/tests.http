@@ -1,13 +1,15 @@
-@baseUrl = http://localhost:4004
-@svc = galaxy
+@baseUrl = http://localhost:4004/
+@svc = odata/v4/galaxy/
 
 ### Service Document
 GET {{baseUrl}}/{{svc}}
 Accept: application/json
+Authorization: Basic YWRtaW51c2VyOmFiY2QxMjM0
 
 ### Metadata
 GET {{baseUrl}}/{{svc}}/$metadata
 Accept: application/xml
+Authorization: Basic YWRtaW51c2VyOmFiY2QxMjM0
 
 ### Get all spacefarers (401 Unauthorized)
 GET {{baseUrl}}/{{svc}}/Spacefarers?$count=true&$orderby=name
@@ -68,4 +70,18 @@ Accept: application/json
 "position_code":     "NAV",
 "spacesuitColor_code": "COB",
 "email": ""
+}
+
+
+### CREATE spacefarer (Admin) — should return 201 and an entity
+# @name create_admin_spacefarer
+POST {{baseUrl}}//{{svc}}/Spacefarers
+Authorization: Basic YWRtaW51c2VyOmFiY2QxMjM0
+Content-Type: application/json
+Prefer: return=representation
+
+{
+  "name": "Test Pilot",
+  "stardustCollection": 120,
+  "wormholeNavigationSkill": 6
 }

@@ -27,33 +27,36 @@ type Role        : String enum {
     Cadet;
 }
 
-entity Planets : cuid {
+type Email : String(150) @assert.format: '^[^@]+@[^@]+\.[^@]+$'
+                          @assert.format.message: 'Provide a valid email address';
+
+entity Planets : cuid, managed {
     key code  : Code;
         name  : Name;
         descr : Description;
 }
 
-entity Departments {
+entity Departments : cuid, managed {
     key code  : Code;
         name  : Name;
         descr : Description;
 }
 
-entity Positions {
+entity Positions : cuid, managed {
     key code  : Code;
         name  : Name;
         descr : Description;
 }
 
-entity SuitColors {
+entity SuitColors : cuid, managed {
     key code  : Code;
         name  : Name;
         descr : Description;
 }
 
-entity Spacefarers : cuid {
+entity Spacefarers : cuid, managed {
     name                    : Name @mandatory;
-    email                   : String(150);
+    email                   : Email;
     stardustCollection      : Stardust default 0;
     wormholeNavigationSkill : WormholeNav default 0;
     totalMerit              : MeritPoints default 0;

@@ -1,25 +1,28 @@
-# Getting Started
+# Galactic Spacefarers
+The project is containerized with Docker to ensure a consistent environment across all setups.
 
-Welcome to your new project.
+### 1. Configure environment variables
+Update the `.env` file in the project root.  
 
-It contains these folders and files, following our recommended project layout:
+### 2. Start the application
+```docker compose up --build```
 
-File or Folder | Purpose
----------|----------
-`app/` | content for UI frontends goes here
-`db/` | your domain models and data go here
-`srv/` | your service models and code go here
-`package.json` | project metadata and configuration
-`readme.md` | this getting started guide
+Frontend will be available at `http://localhost:5173`
 
+Server will be available at `http://localhost:4004`
 
-## Next Steps
+* Pages: List (sort/filter/paginate), Create, Edit
+* `service GalacticService` exposing projections for all entities
+* Mocked auth for local dev
+* DB persists in `./db` mount
+* Vite app under `spacefarers-react` reads OData from `/odata`
+* `GET /odata/v4/galaxy/Spacefarers?$top=5&$count=true` returns rows & `@odata.count`
+* `POST /odata/v4/galaxy/Spacefarers` validates ranges and returns created entity
+* After create, console shows "cosmic email sent"/ email delivered
+* Planet isolation: user A (planet X) cannot read/write planet Y records
 
-- Open a new terminal and run `cds watch`
-- (in VS Code simply choose _**Terminal** > Run Task > cds watch_)
-- Start adding content, for example, a [db/schema.cds](db/schema.cds).
+* Attempts at BTP CF deploy: 
 
+https://port4004-workspaces-ws-e83f3.us10.trial.applicationstudio.cloud.sap/
 
-## Learn More
-
-Learn more at https://cap.cloud.sap/docs/get-started/.
+https://port5173-workspaces-ws-e83f3.us10.trial.applicationstudio.cloud.sap/

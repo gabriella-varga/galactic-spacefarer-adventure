@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+  cap:
+    image: node:20-alpine
+    container_name: cap-galaxy-dev
+    working_dir: /workspace
+    command: sh -c "npm ci && npm i -g @sap/cds-dk && node docker/ensure-db.js db/galaxy.db && DEBUG=cds:auth* cds watch"
+    environment:
+      TZ: Europe/Budapest
+      SMTP_HOST: ${SMTP_HOST}
+      SMTP_USER: ${SMTP_USER}
+      SMTP_PASS: ${SMTP_PASS}
+      MAIL_FROM: ${MAIL_FROM:-"Galactic HQ" <no-reply@galaxy.local>}
+    ports:
+      - "4004:4004"
+    volumes:
+      - ./:/workspace
+      - cap_node_modules:/workspace/node_modules
+
+  web:
+    image: node:20-alpine
+    container_name: spacefarers-react-dev
+    working_dir: /workspace/spacefarers-react
+    command: sh -c "npm ci && npm run dev -- --host 0.0.0.0 --port 5173"
+    environment:
+      TZ: Europe/Budapest
+      VITE_PROXY_TARGET: http://cap:4004
+      CHOKIDAR_USEPOLLING: "true"
+    ports:
+      - "5173:5173"
+    depends_on:
+      - cap
+    volumes:
+      - ./spacefarers-react:/workspace/spacefarers-react
+      - web_node_modules:/workspace/spacefarers-react/node_modules
+
+volumes:
+  cap_node_modules:
+  web_node_modules:
